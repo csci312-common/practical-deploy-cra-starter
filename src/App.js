@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
 function LabeledSlider(props) {
@@ -17,6 +18,16 @@ function LabeledSlider(props) {
     </div>
   );
 }
+
+LabeledSlider.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+  setValue: PropTypes.func.isRequired,
+};
+
 
 function ColorPicker() {
   // Each color component is independent and so is a distinct piece of state
