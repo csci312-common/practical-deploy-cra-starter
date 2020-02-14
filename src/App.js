@@ -1,26 +1,58 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function LabeledSlider(props) {
+  const { label, value, setValue } = props;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="color-label">{label}:</div>
+      <input
+        type="range"
+        min="0"
+        max="255"
+        value={value}
+        onChange={event => setValue(event.target.value)}
+      />
+      <span>{value}</span>
     </div>
   );
+}
+
+function ColorPicker() {
+  // Each color component is independent and so is a distinct piece of state
+  const [red, setRed] = React.useState(0);
+  const [green, setGreen] = React.useState(0);
+  const [blue, setBlue] = React.useState(0);
+  
+  const color = {
+    background: `rgb(${red},${green},${blue})`
+  };
+  return (
+    <div>
+      <div id="color" className="color-swatch" style={color} />
+      <LabeledSlider
+        label="Red"
+        value={red}
+        setValue={value => setRed(value)}
+      />
+      <LabeledSlider
+        label="Green"
+        value={green}
+        setValue={value => setGreen(value)}
+      />
+      <LabeledSlider
+        label="Blue"
+        value={blue}
+        setValue={value => setBlue(value)}
+      />
+    </div>
+  );
+}
+
+export { ColorPicker };
+
+function App() {
+  return (<ColorPicker />);
 }
 
 export default App;
