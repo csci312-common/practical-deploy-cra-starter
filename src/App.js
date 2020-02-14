@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
+import styled from 'styled-components';
+
+const ColorLabel = styled.div`
+display: inline-block;
+width: 50px;
+text-align: left;
+`;
 
 function LabeledSlider(props) {
   const { label, value, setValue } = props;
   return (
     <div>
-      <div className="color-label">{label}:</div>
+      <ColorLabel>{label}:</ColorLabel>
       <input
         type="range"
         min="0"
@@ -26,6 +32,13 @@ LabeledSlider.propTypes = {
   setValue: PropTypes.func.isRequired,
 };
 
+const ColorSwatch = styled.div`
+width: 100px;
+height: 100px;
+border: 1px solid black;
+background: ${(props) => `rgb(${props.red},${props.green},${props.blue})`};
+`;
+
 
 function ColorPicker() {
   // Each color component is independent and so is a distinct piece of state
@@ -33,12 +46,9 @@ function ColorPicker() {
   const [green, setGreen] = React.useState(0);
   const [blue, setBlue] = React.useState(0);
   
-  const color = {
-    background: `rgb(${red},${green},${blue})`
-  };
   return (
     <div>
-      <div id="color" className="color-swatch" style={color} />
+      <ColorSwatch red={red} green={green} blue={blue} />
       <LabeledSlider
         label="Red"
         value={red}
@@ -58,7 +68,7 @@ function ColorPicker() {
   );
 }
 
-export { ColorPicker };
+export { ColorPicker, ColorSwatch };
 
 function App() {
   return (<ColorPicker />);

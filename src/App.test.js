@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 // Import ColorPicker to test
-import { ColorPicker } from './App';	
+import { ColorPicker, ColorSwatch } from './App';	
 
 test('Updates background color', () => {
   const colorPicker = mount(<ColorPicker />);
@@ -12,7 +12,7 @@ test('Updates background color', () => {
   expect(sliders).toHaveLength(3);
   
   // The initial background color should be 0, 0, 0
-  expect(colorPicker.find('#color')).toHaveStyle('background', 'rgb(0,0,0)');
+  expect(colorPicker.find(ColorSwatch)).toHaveStyleRule('background', 'rgb(0,0,0)');
 
   // "Move" the sliders
   sliders.forEach(slider =>
@@ -20,10 +20,8 @@ test('Updates background color', () => {
   );
 
   // The color box background should be set to slider values
-  expect(colorPicker.find('#color')).toHaveStyle(
-    'background',
-    'rgb(100,100,100)'
-  );
+  expect(colorPicker.find(ColorSwatch)).toHaveStyleRule('background', 'rgb(100,100,100)');
+
 
   // The three numeric values should be updated
   const values = colorPicker.find('span');
