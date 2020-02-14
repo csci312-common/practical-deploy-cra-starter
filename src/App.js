@@ -21,10 +21,7 @@ function LabeledSlider(props) {
 
 LabeledSlider.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
+  value: PropTypes.number.isRequired,
   setValue: PropTypes.func.isRequired,
 };
 
