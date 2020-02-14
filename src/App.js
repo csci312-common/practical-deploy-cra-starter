@@ -11,8 +11,9 @@ function LabeledSlider(props) {
         type="range"
         min="0"
         max="255"
+        step="1"
         value={value}
-        onChange={event => setValue(event.target.value)}
+        onChange={event => setValue(parseInt(event.target.value, 10))}
       />
       <span>{value}</span>
     </div>
